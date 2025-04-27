@@ -1,0 +1,68 @@
+[
+    {
+        "suspect": "Jamal Reyes",
+        "crime_scene": "108 Linden St, Queens, NY",
+        "distance_meters": 979.96,
+        "ping_time": "2025-03-05 02:20:00"
+    },
+    {
+        "suspect": "Kevin Ortega",
+        "crime_scene": "108 Linden St, Queens, NY",
+        "distance_meters": 1054.68,
+        "ping_time": "2025-03-05 02:24:00"
+    },
+    {
+        "suspect": "Kevin Ortega",
+        "crime_scene": "108 Linden St, Queens, NY",
+        "distance_meters": 974.23,
+        "ping_time": "2025-03-05 02:18:00"
+    },
+    {
+        "suspect": "Jamal Reyes",
+        "crime_scene": "104 Linden St, Queens, NY",
+        "distance_meters": 494.52,
+        "ping_time": "2025-03-04 02:34:00"
+    },
+    {
+        "suspect": "Ruth Chen",
+        "crime_scene": "104 Linden St, Queens, NY",
+        "distance_meters": 996.77,
+        "ping_time": "2025-03-04 02:45:00"
+    },
+    {
+        "suspect": "Ruth Chen",
+        "crime_scene": "104 Linden St, Queens, NY",
+        "distance_meters": 996.77,
+        "ping_time": "2025-03-04 02:36:00"
+    },
+    {
+        "suspect": "Kevin Ortega",
+        "crime_scene": "104 Linden St, Queens, NY",
+        "distance_meters": 938.19,
+        "ping_time": "2025-03-04 02:55:00"
+    },
+    {
+        "suspect": "Kevin Ortega",
+        "crime_scene": "104 Linden St, Queens, NY",
+        "distance_meters": 1168.05,
+        "ping_time": "2025-03-04 02:44:00"
+    },
+    {
+        "suspect": "Jamal Reyes",
+        "crime_scene": "104 Linden St, Queens, NY",
+        "distance_meters": 917.71,
+        "ping_time": "2025-03-04 02:47:00"
+    },
+    {
+        "suspect": "Kevin Ortega",
+        "crime_scene": "102 Linden St, Queens, NY",
+        "distance_meters": 935.09,
+        "ping_time": "2025-03-03 02:35:00"
+    },
+    {
+        "suspect": "Ruth Chen",
+        "crime_scene": "102 Linden St, Queens, NY",
+        "distance_meters": 1075.34,
+        "ping_time": "2025-03-03 02:35:00"
+    }
+]
