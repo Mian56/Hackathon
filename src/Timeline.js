@@ -41,12 +41,20 @@ function Timeline({ onEventClick, activeSuspects }) {
                             padding: '0.5rem',
                             borderRadius: '5px',
                             cursor: 'pointer',
-                            transition: 'background-color 0.2s ease',
+                            transition: 'all 0.2s ease',
+                            color: '#f5f5f5',  // Default text color (white-ish)
                         }}
-                        onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f0f0f0'}
-                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                        onMouseEnter={e => {
+                            e.currentTarget.style.backgroundColor = '#3a3a3a';  // Darker hover bg
+                            e.currentTarget.style.color = '#ffcc00';            // Change text color on hover
+                        }}
+                        onMouseLeave={e => {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.color = '#f5f5f5';           // Reset to default text color
+                        }}
                     >
-                        <div style={{
+
+                    <div style={{
                             width: '12px',
                             height: '12px',
                             borderRadius: '50%',

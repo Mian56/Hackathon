@@ -12,6 +12,7 @@ function App() {
     const [selectedSuspect, setSelectedSuspect] = useState(null);
     const [showReport, setShowReport] = useState(false);
 
+
     const handleEventClick = (event) => {
         setSelectedEvent(event);
     };
@@ -41,8 +42,14 @@ function App() {
             color: '#f5f5f5',
             minHeight: '100vh',
             maxWidth: '1400px',
-            margin: '0 auto'
+            margin: '0 auto',
+            border: '5px double #ffcc00',  // 🧵 Like crime scene tape!
+            boxShadow: '0 0 20px rgba(255, 204, 0, 0.3)',  // Glow around the whole container
+            backgroundImage: 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 10px, transparent 10px 20px)',  // Wireframe grid vibe
+            backgroundSize: '40px 40px',  // Adjust grid size
+            backgroundBlendMode: 'overlay'  // Blend it smoothly with the dark background
         }}>
+
             <h1 style={{
                 textAlign: 'center',
                 marginBottom: '2rem',
