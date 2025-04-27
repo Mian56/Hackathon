@@ -23,11 +23,9 @@ function SuspectProfiles({ onSelectSuspect }) {
             name: 'Kevin Ortega',
             alibi: 'Claims to be at home watching TV. Family confirms he came home late (no digital proof).',
             evidence: [
-                'Phone pinged near 102 Linden St (Mar 3, 2:35 AM)',
                 'Phone pinged near 108 Linden St (Mar 5, 2:18 AM)'
             ],
             timeline: [
-                { type: 'Ping', label: 'Ping near 102 Linden', time: 'Mar 3, 2:35 AM', lat: 40.698977, lon: -73.912002 },
                 { type: 'Ping', label: 'Ping near 108 Linden', time: 'Mar 5, 2:18 AM', lat: 40.700050, lon: -73.912450 }
             ]
 
@@ -36,11 +34,9 @@ function SuspectProfiles({ onSelectSuspect }) {
             name: 'Jamal Reyes',
             alibi: 'Claims he was delivering food on Linden St (no specific orders match).',
             evidence: [
-                'Phone pinged near 104 Linden St (Mar 4, 2:34 AM)',
                 'Phone pinged near 108 Linden St (Mar 5, 2:20 AM)'
             ],
             timeline: [
-                { type: 'Ping', label: 'Ping near 104 Linden', time: 'Mar 4, 2:34 AM', lat: 40.696739, lon: -73.916562 },
                 { type: 'Ping', label: 'Ping near 108 Linden', time: 'Mar 5, 2:20 AM', lat: 40.700200, lon: -73.912600 }
             ]
 
@@ -55,16 +51,22 @@ function SuspectProfiles({ onSelectSuspect }) {
                     <div
                         key={idx}
                         onClick={() => {
-                            setExpanded(expanded === idx ? null : idx);
-                            onSelectSuspect(expanded === idx ? null : suspect);  // Pass suspect to the map
+                            const newExpanded = expanded === idx ? null : idx;
+                            setExpanded(newExpanded);
+                            if (newExpanded === null) {
+                                onSelectSuspect(suspects[expanded]);
+                            } else {
+                                onSelectSuspect(suspects[newExpanded]);
+                            }
                         }}
+
                         style={{
                             border: '1px solid #ddd',
                             borderRadius: '12px',
                             padding: '1rem',
                             width: '250px',
                             boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                            backgroundColor: '#fff',
+                            backgroundColor: '#333',
                             transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                             cursor: 'pointer'
                         }}
@@ -90,7 +92,7 @@ function SuspectProfiles({ onSelectSuspect }) {
                         {expanded === idx && (
                             <div style={{ marginTop: '1rem', borderTop: '1px solid #eee', paddingTop: '0.5rem' }}>
                                 <h4>Timeline</h4>
-                                <ul style={{ fontSize: '0.85rem', color: '#444', paddingLeft: '1rem' }}>
+                                <ul style={{ fontSize: '0.85rem', color: '#f5f5f5', paddingLeft: '1rem' }}>
                                     {suspect.timeline.map((event, eIdx) => (
                                         <li key={eIdx}>
                                             <strong>{event.type}:</strong> {event.label} <em style={{ color: 'gray' }}>({event.time})</em>

@@ -1,24 +1,40 @@
-function Timeline({ onEventClick }) {
-    const events = [
-        { type: 'Crime', label: '102 Linden St Break-in', time: 'Mar 3, 2:13 AM', lat: 40.6959, lon: -73.9158 },
+function Timeline({ onEventClick, activeSuspects }) {
+    const baseEvents = [
+        { type: 'Crime', label: '102 Linden St Break-in', time: 'Mar 3, 2:13 AM', lat: 40.700900, lon: -73.912300 },
         { type: 'Camera', label: 'Shadowy figure detected', time: 'Mar 3, 2:14 AM', lat: 40.700509, lon: -73.913144 },
-        { type: 'Ruth Ping', label: 'Ruth Ping near 102 Linden', time: 'Mar 3, 2:35 AM', lat: 40.700864, lon: -73.912427 },
-        { type: 'Crime', label: '104 Linden St Break-in', time: 'Mar 4, 2:29 AM', lat: 40.6961, lon: -73.9158 },
+        { type: 'Crime', label: '104 Linden St Break-in', time: 'Mar 4, 2:29 AM', lat: 40.700700, lon: -73.912400 },
         { type: 'Camera', label: 'Person with bag detected', time: 'Mar 4, 2:32 AM', lat: 40.700719, lon: -73.911759 },
-        { type: 'Ruth Ping', label: 'Ruth Ping near 104 Linden', time: 'Mar 4, 2:36 AM', lat: 40.700100, lon: -73.912500 },
         { type: 'Camera', label: 'Bike turning corner detected', time: 'Mar 4, 2:48 AM', lat: 40.700299, lon: -73.912299 },
-        { type: 'Crime', label: '108 Linden St Break-in', time: 'Mar 5, 2:07 AM', lat: 40.6961, lon: -73.9158 },
+        { type: 'Crime', label: '108 Linden St Break-in', time: 'Mar 5, 2:07 AM', lat: 40.700500, lon: -73.912500 },
         { type: 'Camera', label: 'Bike near 108 Linden detected', time: 'Mar 5, 2:09 AM', lat: 40.700371, lon: -73.911529 },
     ];
+
+    // Combine all active suspect timelines
+    const suspectEvents = activeSuspects.flatMap(suspect =>
+        suspect.timeline.map(ping => ({
+            type: `${suspect.name.split(' ')[0]} Ping`,
+            label: ping.label,
+            time: ping.time,
+            lat: ping.lat,
+            lon: ping.lon
+        }))
+    );
+
+    const allEvents = [...baseEvents, ...suspectEvents].sort((a, b) => {
+        const timeA = new Date(`2025 ${a.time}`);
+        const timeB = new Date(`2025 ${b.time}`);
+        return timeA - timeB;
+    });
+
 
     return (
         <div style={{ marginTop: '2rem' }}>
             <h2>Timeline of Events</h2>
             <div style={{ position: 'relative', marginLeft: '20px', paddingLeft: '10px', borderLeft: '2px solid gray' }}>
-                {events.map((event, idx) => (
+                {allEvents.map((event, idx) => (
                     <div
                         key={idx}
-                        onClick={() => onEventClick(event)}  // Click handler
+                        onClick={() => onEventClick(event)}
                         style={{
                             marginBottom: '1.5rem',
                             position: 'relative',
@@ -30,19 +46,28 @@ function Timeline({ onEventClick }) {
                         onMouseEnter={e => e.currentTarget.style.backgroundColor = '#f0f0f0'}
                         onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
                     >
-                        {/* Circle dot */}
                         <div style={{
                             width: '12px',
                             height: '12px',
                             borderRadius: '50%',
-                            backgroundColor: event.type === 'Crime' ? 'red' : event.type === 'Ruth Ping' ? 'blue' : 'orange',
+                            backgroundColor:
+                                event.type.includes('Crime') ? 'red' :
+                                    event.type.includes('Camera') ? 'orange' :
+                                        event.type.includes('Ruth') ? 'blue' :
+                                            event.type.includes('Kevin') ? 'green' :
+                                                event.type.includes('Jamal') ? 'purple' : 'gray',
                             position: 'absolute',
                             left: '-18px',
                             top: '12px'
                         }}></div>
-                        {/* Event text */}
                         <div>
-                            <strong style={{ color: event.type === 'Crime' ? 'red' : event.type === 'Ruth Ping' ? 'blue' : 'orange' }}>
+                            <strong style={{ color:
+                                    event.type.includes('Crime') ? 'red' :
+                                        event.type.includes('Camera') ? 'orange' :
+                                            event.type.includes('Ruth') ? 'blue' :
+                                                event.type.includes('Kevin') ? 'green' :
+                                                    event.type.includes('Jamal') ? 'purple' : 'gray'
+                            }}>
                                 {event.type}:
                             </strong> {event.label} <em style={{ color: 'gray' }}>({event.time})</em>
                         </div>

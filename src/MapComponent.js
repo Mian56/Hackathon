@@ -12,20 +12,16 @@ function FlyToLocation({ lat, lon }) {
 }
 
 
-function MapComponent({ selectedEvent, suspectPings }) {
+function MapComponent({ selectedEvent, activeSuspects }) {
 
 
     const crimeScenes = [
-        { lat: 40.6959, lon: -73.9158, label: '102 Linden St' },
-        { lat: 40.6961, lon: -73.9158, label: '104 Linden St' },
-        { lat: 40.6961, lon: -73.9158, label: '108 Linden St' },
+        { lat: 40.700900, lon: -73.912300, label: '102 Linden St' },
+        { lat: 40.700700, lon: -73.912400, label: '104 Linden St' },
+        { lat: 40.700500, lon: -73.912500, label: '108 Linden St' },
     ];
 
-    const ruthPings = [
-        { lat: 40.700864, lon: -73.912427, label: 'Ruth Ping: Mar 3, 2:35 AM' },
-        { lat: 40.700100, lon: -73.912500, label: 'Ruth Ping: Mar 4, 2:36 AM' },
-        { lat: 40.700100, lon: -73.912500, label: 'Ruth Ping: Mar 4, 2:45 AM' }
-    ];
+
 
     const cameraEvents = [
         { lat: 40.700509, lon: -73.913144, label: 'Camera: Shadowy figure Mar 3, 2:14 AM' },
@@ -51,14 +47,6 @@ function MapComponent({ selectedEvent, suspectPings }) {
                     </CircleMarker>
                 ))}
 
-
-                {/* Ruth's Pings */}
-                {ruthPings.map((ping, idx) => (
-                    <CircleMarker key={`ruth-${idx}`} center={[ping.lat, ping.lon]} radius={8} color="blue">
-                        <Popup>{ping.label}</Popup>
-                    </CircleMarker>
-                ))}
-
                 {/* Camera Events */}
                 {cameraEvents.map((event, idx) => (
                     <CircleMarker key={`camera-${idx}`} center={[event.lat, event.lon]} radius={8} color="orange">
@@ -67,16 +55,28 @@ function MapComponent({ selectedEvent, suspectPings }) {
                 ))}
 
                 {/* Suspect Pings (only when selected) */}
-                {suspectPings.map((ping, idx) => (
-                    <CircleMarker
-                        key={`suspect-${idx}`}
-                        center={[ping.lat, ping.lon]}
-                        radius={10}
-                        color="green"
-                    >
-                        <Popup>{ping.label} ({ping.time})</Popup>
-                    </CircleMarker>
-                ))}
+                {activeSuspects.flatMap((suspect, sIdx) =>
+                    suspect.timeline.map((ping, idx) => {
+                        let color = 'gray';
+                        if (suspect.name === 'Ruth Chen') color = 'blue';
+                        else if (suspect.name === 'Kevin Ortega') color = 'green';
+                        else if (suspect.name === 'Jamal Reyes') color = 'purple';
+
+                        return (
+                            <CircleMarker
+                                key={`suspect-${suspect.name}-${idx}`}  // 🛠️ Use suspect name + idx here
+                                center={[ping.lat, ping.lon]}
+                                radius={10}
+                                color={color}
+                            >
+                                <Popup>{ping.label} ({ping.time})</Popup>
+                            </CircleMarker>
+                        );
+                    })
+                )}
+
+
+
 
 
             </MapContainer>
