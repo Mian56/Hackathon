@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+🚔 Crime Investigation: Linden St Burglaries
+This project is a crime investigation dashboard that visualizes crime scenes, camera events, and suspect phone pings on an interactive map and timeline.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Built with React and Leaflet.js.
 
-## Available Scripts
+Uses suspect profiles, interactive map markers, timeline events, and a generate report modal.
 
+Styled with a dark crime-scene theme for an immersive experience.
+
+🔧 Features
+Interactive Crime Map 🗺️
+Visualize:
+
+Crime scenes (🔴 Red markers).
+
+Camera detections (🟠 Orange markers).
+
+Suspect phone pings:
+
+Ruth (🔵 Blue)
+
+Kevin (🟢 Green)
+
+Jamal (🟣 Purple)
+
+Legend overlay to explain map markers.
+
+Timeline of Events 📅
+
+Clickable timeline entries (crimes, cameras, pings).
+
+Scrollable panel for easy navigation.
+
+Color-coded events based on type (Crime, Camera, Suspect).
+
+Suspect Profiles 👤
+
+Toggle suspects to highlight their pings on the map and timeline.
+
+Profiles update dynamically based on selection.
+
+Generate Report Modal 📄
+
+Animated Generate Report button with scaling and shadows.
+
+Clicking opens a modal in the center summarizing key suspect activity:
+
+Ruth suspected on March 3rd and 4th.
+
+Kevin & Jamal suspected on March 5th.
+
+Thematic UI Design
+
+Dark mode with yellow, red, blue highlights to mimic an investigation board.
+
+Dashed borders (like crime scene tape).
+
+Subtle grid pattern overlay for a wireframe vibe.
+
+🚀 Technologies Used
+React.js (Create React App)
+
+Leaflet.js (for interactive maps)
+
+JavaScript (ES6) (no external CSS framework)
+
+Inline CSS styling (fully customized)
+
+💻 Available Scripts
 In the project directory, you can run:
 
-### `npm start`
+npm start
+Runs the app in development mode.
+Opens at http://localhost:3000 by default (or another port if in use).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm run build
+Builds the app for production.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+npm test
+Launches the test runner.
 
-### `npm test`
+📝 Topics Covered
+React state management for controlling:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Selected suspects
 
-### `npm run build`
+Selected map events
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Modal visibility
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Leaflet map layers with:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Markers for different events
 
-### `npm run eject`
+Fly-to animations on event click.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+CSS animations for:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Button hover effects (scale, shadow).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Modal popups centered on screen.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Custom timeline with:
 
-## Learn More
+Color-coded dots
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Hover animations (text and background color shift).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Global styling without external CSS files (using useEffect for body styles).
