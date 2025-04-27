@@ -33,8 +33,8 @@ function MapComponent({ selectedEvent, activeSuspects }) {
 
     return (
 
-        <div>
-            <MapContainer center={[40.696, -73.9158]} zoom={15} style={{ height: '600px', width: '100%' }}  >
+        <div style={{ height: '100%', width: '100%' }}>
+            <MapContainer center={[40.696, -73.9158]} zoom={15} style={{ height: '100%', width: '100%' }}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
                 {selectedEvent && <FlyToLocation lat={selectedEvent.lat} lon={selectedEvent.lon} />}
@@ -78,11 +78,11 @@ function MapComponent({ selectedEvent, activeSuspects }) {
 
 
 
-
             </MapContainer>
 
             {/* Add the Legend below the Map */}
-            <Legend />
+            {/*<Legend />*/}
+
         </div>
     );
 
