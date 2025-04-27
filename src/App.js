@@ -11,7 +11,10 @@ function App() {
     const [activeSuspects, setActiveSuspects] = useState([]);  // Array of active suspects
     const [selectedSuspect, setSelectedSuspect] = useState(null);
     const [showReport, setShowReport] = useState(false);
-
+    const [showResults, setShowResults] = useState(false);
+    const [analysisResults, setAnalysisResults] = useState([]);
+    const [showAnalysis, setShowAnalysis] = useState(false);
+    const [analysisData, setAnalysisData] = useState([]);
 
     const handleEventClick = (event) => {
         setSelectedEvent(event);
@@ -26,13 +29,18 @@ function App() {
                 // Remove suspect
                 return prev.filter(s => s.name !== suspect.name);
             } else {
-                // Add suspect
                 return [...prev, suspect];
             }
         });
         setSelectedSuspect(suspect);
     };
 
+    const handleLoadResults = async () => {
+        const response = await fetch('/analysis_results.json');
+        const data = await response.json();
+        setAnalysisResults(data);
+        setShowResults(true);
+    };
 
     return (
         <div style={{
@@ -129,7 +137,7 @@ function App() {
                 </div>
             </div>
 
-            {/* Optional: Case Controls/Filters */}
+            {/* Control Buttons */}
             <div style={{
                 marginTop: '2rem',
                 display: 'flex',
@@ -138,37 +146,103 @@ function App() {
                 flexWrap: 'wrap'
             }}>
                 <button
+                    style={buttonStyle}
+                    onMouseEnter={hoverEffect}
+                    onMouseLeave={leaveEffect}
+                    onClick={() => setShowReport(true)}
+                >
+                    Generate Report
+                </button>
+
+                <button
                     style={{
-                        backgroundColor: '#ff0000',
+                        backgroundColor: '#3399ff',
                         color: '#fff',
                         border: 'none',
                         padding: '0.75rem 1.5rem',
                         borderRadius: '5px',
                         fontWeight: 'bold',
                         cursor: 'pointer',
-                        transition: 'all 0.3s ease',  // Smooth transition
+                        transition: 'all 0.3s ease',
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
                     }}
                     onMouseEnter={(e) => {
                         e.target.style.transform = 'scale(1.05)';
-                        e.target.style.boxShadow = '0 6px 12px rgba(255, 0, 0, 0.5)';
+                        e.target.style.boxShadow = '0 6px 12px rgba(51, 153, 255, 0.5)';
                     }}
                     onMouseLeave={(e) => {
                         e.target.style.transform = 'scale(1)';
                         e.target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
                     }}
-                    onClick={() => setShowReport(true)}
+                    onClick={() => {
+                        fetch('analysis/analysis_results.json')
+                            .then(response => response.json())
+                            .then(data => {
+                                setAnalysisData(data);
+                                setShowAnalysis(true);
+                            })
+                            .catch(error => console.error('Error loading analysis results:', error));
+                    }}
                 >
-                    Generate Report
+                    Show Analysis Results
                 </button>
 
-
-                <ReportModal isOpen={showReport} onClose={() => setShowReport(false)} />
             </div>
+
+            {/* Show Analysis Results */}
+            {showAnalysis && (
+                <div style={{
+                    marginTop: '2rem',
+                    backgroundColor: '#2c2c2c',
+                    padding: '1rem',
+                    borderRadius: '10px',
+                    border: '2px solid #3399ff',
+                    boxShadow: '0 4px 12px rgba(51, 153, 255, 0.3)'
+                }}>
+                    <h2 style={{ color: '#3399ff' }}>📊 Analysis Results</h2>
+                    {analysisData.length > 0 ? (
+                        <ul style={{ listStyleType: 'none', padding: 0 }}>
+                            {analysisData.map((item, index) => (
+                                <li key={index} style={{ marginBottom: '1rem', borderBottom: '1px solid gray', paddingBottom: '0.5rem' }}>
+                                    <strong>Suspect:</strong> {item.suspect}<br />
+                                    <strong>Crime Scene:</strong> {item.crime_scene}<br />
+                                    <strong>Distance:</strong> {item.distance_meters} meters<br />
+                                    <strong>Ping Time:</strong> {item.ping_time}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No results found.</p>
+                    )}
+                </div>
+            )}
+
+
+            <ReportModal isOpen={showReport} onClose={() => setShowReport(false)} />
         </div>
     );
-
 }
-//hi
+
+const buttonStyle = {
+    backgroundColor: '#ff0000',
+    color: '#fff',
+    border: 'none',
+    padding: '0.75rem 1.5rem',
+    borderRadius: '5px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
+};
+
+const hoverEffect = (e) => {
+    e.target.style.transform = 'scale(1.05)';
+    e.target.style.boxShadow = '0 6px 12px rgba(255, 0, 0, 0.5)';
+};
+
+const leaveEffect = (e) => {
+    e.target.style.transform = 'scale(1)';
+    e.target.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+};
 
 export default App;
