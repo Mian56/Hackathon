@@ -164,3 +164,6 @@ const analysisPanelStyle = { marginTop: '2rem', backgroundColor: '#2c2c2c', padd
 const resultItemStyle = { marginBottom: '1rem', borderBottom: '1px solid gray', paddingBottom: '0.5rem' };
 
 export default App;
+
+
+//GG
